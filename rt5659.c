@@ -1858,7 +1858,7 @@ static const struct snd_kcontrol_new rt5659_snd_controls[] = {
 static int set_dmic_clk(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 	struct rt5659_priv *rt5659 = snd_soc_codec_get_drvdata(codec);
 	int div[] = { 2, 3, 4, 6, 8, 12 }, idx =
 	    -EINVAL, i, rate, red, bound, temp;
@@ -1889,7 +1889,7 @@ static int set_dmic_clk(struct snd_soc_dapm_widget *w,
 static int set_adc_clk(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 
 	switch (event) {
 	case SND_SOC_DAPM_POST_PMU:
@@ -1914,7 +1914,7 @@ static int set_adc_clk(struct snd_soc_dapm_widget *w,
 static int rt5659_charge_pump_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 
 	pr_debug("%s\n", __func__);
 
@@ -1938,7 +1938,7 @@ static int is_sys_clk_from_pll(struct snd_soc_dapm_widget *w,
 			 struct snd_soc_dapm_widget *sink)
 {
 	unsigned int val;
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 
 	pr_debug("%s\n", __func__);
 
@@ -1954,7 +1954,7 @@ static int is_using_asrc(struct snd_soc_dapm_widget *w,
 			 struct snd_soc_dapm_widget *sink)
 {
 	unsigned int reg, shift, val;
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 
 	pr_debug("%s\n", __func__);
 
@@ -2764,7 +2764,7 @@ static const struct snd_kcontrol_new pdm_r_switch =
 static int rt5659_spk_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 
 
 	switch (event) {
@@ -2797,7 +2797,7 @@ static int rt5659_spk_event(struct snd_soc_dapm_widget *w,
 static int rt5659_mono_vref_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 
 	pr_debug("%s\n", __func__);
 
@@ -2821,7 +2821,7 @@ static int rt5659_mono_vref_event(struct snd_soc_dapm_widget *w,
 static int rt5659_mono_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 
 	switch (event) {
 	case SND_SOC_DAPM_PRE_PMU:
@@ -2843,7 +2843,7 @@ static int rt5659_mono_event(struct snd_soc_dapm_widget *w,
 static int rt5659_hp_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 	struct rt5659_priv *rt5659 = snd_soc_codec_get_drvdata(codec);
 
 	pr_debug("%s\n", __func__);
@@ -2876,7 +2876,7 @@ static int rt5659_hp_event(struct snd_soc_dapm_widget *w,
 static int set_bst1_power(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 
 	switch (event) {
 	case SND_SOC_DAPM_POST_PMU:
@@ -2900,7 +2900,7 @@ static int set_bst1_power(struct snd_soc_dapm_widget *w,
 static int set_bst2_power(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 
 	switch (event) {
 	case SND_SOC_DAPM_POST_PMU:
@@ -2924,7 +2924,7 @@ static int set_bst2_power(struct snd_soc_dapm_widget *w,
 static int set_bst3_power(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 
 	switch (event) {
 	case SND_SOC_DAPM_POST_PMU:
@@ -2948,7 +2948,7 @@ static int set_bst3_power(struct snd_soc_dapm_widget *w,
 static int set_bst4_power(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 
 	switch (event) {
 	case SND_SOC_DAPM_POST_PMU:
@@ -2988,7 +2988,7 @@ static int set_dmic_power(struct snd_soc_dapm_widget *w,
 static int rt5659_i2s_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 	struct rt5659_priv *rt5659 = snd_soc_codec_get_drvdata(codec);
 
 	pr_debug("%s\n", __func__);
@@ -3060,7 +3060,7 @@ static int rt5659_i2s_event(struct snd_soc_dapm_widget *w,
 static int rt5659_sto1_filter_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 	struct rt5659_priv *rt5659 = snd_soc_codec_get_drvdata(codec);
 
 	pr_debug("%s\n", __func__);
@@ -3099,7 +3099,7 @@ static int rt5659_sto1_filter_event(struct snd_soc_dapm_widget *w,
 static int rt5659_monol_filter_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 	struct rt5659_priv *rt5659 = snd_soc_codec_get_drvdata(codec);
 
 	pr_debug("%s\n", __func__);
@@ -3134,7 +3134,7 @@ static int rt5659_monol_filter_event(struct snd_soc_dapm_widget *w,
 static int rt5659_monor_filter_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 	struct rt5659_priv *rt5659 = snd_soc_codec_get_drvdata(codec);
 
 	pr_debug("%s\n", __func__);
@@ -3187,7 +3187,7 @@ static int rt5659_adc_depop_event(struct snd_soc_dapm_widget *w,
 static int rt5659_dac1_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 	struct rt5659_priv *rt5659 = snd_soc_codec_get_drvdata(codec);
 
 	pr_debug("%s\n", __func__);
@@ -3212,7 +3212,7 @@ static int rt5659_dac1_event(struct snd_soc_dapm_widget *w,
 static int rt5659_dac2_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
+	struct snd_soc_codec *codec = snd_soc_dapm_to_codec(w->dapm);
 	struct rt5659_priv *rt5659 = snd_soc_codec_get_drvdata(codec);
 
 	pr_debug("%s\n", __func__);
